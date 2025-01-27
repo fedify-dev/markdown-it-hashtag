@@ -45,8 +45,8 @@ console.log(env.hashtags);  // ["#FooBar", "#BazQux"]
 [JSR badge]: https://jsr.io/badges/@fedify/markdown-it-hashtag
 [npm]: https://www.npmjs.com/package/@fedify/markdown-it-hashtag
 [npm badge]: https://img.shields.io/npm/v/%40fedify%2Fmarkdown-it-hashtag?logo=npm
-[GitHub Actions]: https://github.com/dahlia/markdown-it-hashtag/actions/workflows/main.yaml
-[GitHub Actions badge]: https://github.com/dahlia/markdown-it-hashtag/actions/workflows/main.yaml/badge.svg
+[GitHub Actions]: https://github.com/fedify-dev/markdown-it-hashtag/actions/workflows/main.yaml
+[GitHub Actions badge]: https://github.com/fedify-dev/markdown-it-hashtag/actions/workflows/main.yaml/badge.svg
 [markdown-it]: https://github.com/markdown-it/markdown-it
 [options]: https://jsr.io/@fedify/markdown-it-hashtag/doc/~/PluginOptions
 
