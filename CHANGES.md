@@ -6,7 +6,7 @@ Changelog
 Version 0.3.0
 -------------
 
-To be released.
+Released on January 30, 2025.
 
  -  `PluginOptions.link()` became to have the second parameter which takes
     a markdown-it environment object.
