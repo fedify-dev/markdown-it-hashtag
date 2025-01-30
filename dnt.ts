@@ -47,6 +47,7 @@ await build({
       url: "https://github.com/fedify-dev/markdown-it-hashtag/issues",
     },
     funding: [
+      "https://opencollective.com/fedify",
       "https://github.com/sponsors/dahlia",
     ],
     devDependencies: {
