@@ -15,18 +15,21 @@ export interface PluginOptions {
    * A function to render a link href for a hashtag.  If it returns `null`,
    * the hashtag will be rendered as plain text.  `#${tag}` by default.
    */
-  link?: (tag: string) => string | null;
+  // deno-lint-ignore no-explicit-any
+  link?: (tag: string, env: any) => string | null;
 
   /**
    * A function to render extra attributes for a hashtag link.
    */
-  linkAttributes?: (handle: string) => Record<string, string>;
+  // deno-lint-ignore no-explicit-any
+  linkAttributes?: (handle: string, env: any) => Record<string, string>;
 
   /**
    * A function to render a label for a hashtag link.  {@link spanHashAndTag}
    * by default.
    */
-  label?: (handle: string) => string;
+  // deno-lint-ignore no-explicit-any
+  label?: (handle: string, env: any) => string;
 }
 
 /**
@@ -92,7 +95,7 @@ function splitTokens(
       tokens.push(token);
     }
 
-    const href = options?.link?.(match[0]);
+    const href = options?.link?.(match[0], state.env);
     if (href == null && options?.link != null) {
       const token = new state.Token("text", "", 0);
       token.content = match[0];
@@ -103,9 +106,10 @@ function splitTokens(
     }
 
     const token = new state.Token("hashtag", "", 0);
-    token.content = options?.label?.(match[0]) ?? spanHashAndTag(match[0]);
+    token.content = options?.label?.(match[0], state.env) ??
+      spanHashAndTag(match[0]);
     token.level = level;
-    const attrs = options?.linkAttributes?.(match[0]) ?? {};
+    const attrs = options?.linkAttributes?.(match[0], state.env) ?? {};
     attrs.href = href ?? `${match[0]}`;
     token.attrs = Object.entries(attrs);
     token.info = match[0];

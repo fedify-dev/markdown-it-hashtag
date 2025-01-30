@@ -9,9 +9,9 @@ jobs:
       pull-requests: write
     steps:
     - uses: actions/checkout@v4
-    - uses: denoland/setup-deno@v1
+    - uses: denoland/setup-deno@v2
       with:
-        deno-version: v1.x
+        deno-version: v2.x
     - run: deno test --junit-path=.test-report.xml
     - uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
@@ -28,9 +28,9 @@ jobs:
       id-token: write
     steps:
     - uses: actions/checkout@v4
-    - uses: denoland/setup-deno@v1
+    - uses: denoland/setup-deno@v2
       with:
-        deno-version: v1.x
+        deno-version: v2.x
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
@@ -57,3 +57,5 @@ jobs:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       working-directory: ${{ github.workspace }}/npm/
     - run: deno publish --allow-dirty
+
+# cSpell: ignore denoland npmjs

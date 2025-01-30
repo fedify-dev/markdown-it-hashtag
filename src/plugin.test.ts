@@ -40,4 +40,41 @@ Deno.test("hashtag()", () => {
 <p><a href="">This also should be ignored: #FooBar</a></p>
 `,
   );
+
+  const md2 = new MarkdownIt()
+    .use(hashtag, {
+      // deno-lint-ignore no-explicit-any
+      link(tag: string, env: any): string | null {
+        if (
+          !env.allowedPrefixes.some((prefix: string) => tag.startsWith(prefix))
+        ) {
+          return null;
+        }
+        return new URL(
+          `/tags/${encodeURIComponent(tag.substring(1))}`,
+          env.origin,
+        ).href;
+      },
+    });
+  // deno-lint-ignore no-explicit-any
+  const env2: any = {
+    origin: "https://example.com",
+    allowedPrefixes: ["#Foo", "#Baz"],
+  };
+  const html2 = md2.render(
+    "- #FooBar\n- #Baz_Qux\n- #테스트\n- #Quux",
+    env2,
+  );
+  assertEquals(env2.hashtags, ["#FooBar", "#Baz_Qux"]);
+  assertEquals(
+    html2,
+    `\
+<ul>
+<li><a  href="https://example.com/tags/FooBar"><span class="hash">#</span><span class="tag">FooBar</span></a></li>
+<li><a  href="https://example.com/tags/Baz_Qux"><span class="hash">#</span><span class="tag">Baz_Qux</span></a></li>
+<li>#테스트</li>
+<li>#Quux</li>
+</ul>
+`,
+  );
 });
